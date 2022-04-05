@@ -127,6 +127,7 @@ namespace NoteApp.View
             this.Controls.Add(this.Authorlabel);
             this.Controls.Add(this.Versionlabel);
             this.Controls.Add(this.NoteApplabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "AboutForm";
             this.Text = "AboutForm";
             this.ResumeLayout(false);

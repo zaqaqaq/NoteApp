@@ -17,6 +17,16 @@ namespace NoteApp.View
             InitializeComponent();
         }
 
-        
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            NoteForm nf = new NoteForm();
+            this.Close();
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            NoteForm nf = new NoteForm();
+            this.Close();
+        }
     }
 }

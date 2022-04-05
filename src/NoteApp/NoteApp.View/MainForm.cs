@@ -31,5 +31,28 @@ namespace NoteApp.View
         {
 
         }
+
+        private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NoteForm nf = new NoteForm();
+            nf.Show();
+        }
+
+        private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NoteForm nf = new NoteForm();
+            nf.Show();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm af = new AboutForm();
+            af.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
