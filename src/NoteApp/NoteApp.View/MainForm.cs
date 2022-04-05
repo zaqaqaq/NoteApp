@@ -54,5 +54,17 @@ namespace NoteApp.View
         {
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NoteForm nf = new NoteForm();
+            nf.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            NoteForm nf = new NoteForm();
+            nf.Show();
+        }
     }
 }

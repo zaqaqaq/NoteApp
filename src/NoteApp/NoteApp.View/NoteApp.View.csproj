@@ -86,6 +86,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -102,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NoteApp.ico" />
+    <None Include="Resources\icons8-заметка-50 %282%29.png" />
+    <None Include="Resources\icons8-заметка-50 %281%29.png" />
+    <None Include="Resources\icons8-заметка-50.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
