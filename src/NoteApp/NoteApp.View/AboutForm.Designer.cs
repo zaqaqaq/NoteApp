@@ -30,76 +30,76 @@ namespace NoteApp.View
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-            this.NoteApplabel = new System.Windows.Forms.Label();
-            this.Versionlabel = new System.Windows.Forms.Label();
-            this.Authorlabel = new System.Windows.Forms.Label();
-            this.Emaillabel = new System.Windows.Forms.Label();
-            this.Gitlabel = new System.Windows.Forms.Label();
-            this.Cclabel = new System.Windows.Forms.Label();
+            this.NoteAppLabel = new System.Windows.Forms.Label();
+            this.VersionLabel = new System.Windows.Forms.Label();
+            this.AuthorLabel = new System.Windows.Forms.Label();
+            this.EmailLabel = new System.Windows.Forms.Label();
+            this.GitLabel = new System.Windows.Forms.Label();
+            this.CcLabel = new System.Windows.Forms.Label();
             this.EmailLinkLabel = new System.Windows.Forms.LinkLabel();
             this.GitLinkLabel = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
-            // NoteApplabel
+            // NoteAppLabel
             // 
-            this.NoteApplabel.AutoSize = true;
-            this.NoteApplabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NoteApplabel.Location = new System.Drawing.Point(8, 15);
-            this.NoteApplabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.NoteApplabel.Name = "NoteApplabel";
-            this.NoteApplabel.Size = new System.Drawing.Size(104, 26);
-            this.NoteApplabel.TabIndex = 0;
-            this.NoteApplabel.Text = "NoteApp";
+            this.NoteAppLabel.AutoSize = true;
+            this.NoteAppLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.NoteAppLabel.Location = new System.Drawing.Point(8, 15);
+            this.NoteAppLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.NoteAppLabel.Name = "NoteAppLabel";
+            this.NoteAppLabel.Size = new System.Drawing.Size(104, 26);
+            this.NoteAppLabel.TabIndex = 0;
+            this.NoteAppLabel.Text = "NoteApp";
             // 
-            // Versionlabel
+            // VersionLabel
             // 
-            this.Versionlabel.AutoSize = true;
-            this.Versionlabel.Location = new System.Drawing.Point(8, 56);
-            this.Versionlabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Versionlabel.Name = "Versionlabel";
-            this.Versionlabel.Size = new System.Drawing.Size(43, 13);
-            this.Versionlabel.TabIndex = 1;
-            this.Versionlabel.Text = "v. 1.0.0";
+            this.VersionLabel.AutoSize = true;
+            this.VersionLabel.Location = new System.Drawing.Point(8, 56);
+            this.VersionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.VersionLabel.Name = "VersionLabel";
+            this.VersionLabel.Size = new System.Drawing.Size(43, 13);
+            this.VersionLabel.TabIndex = 1;
+            this.VersionLabel.Text = "v. 1.0.0";
             // 
-            // Authorlabel
+            // AuthorLabel
             // 
-            this.Authorlabel.AutoSize = true;
-            this.Authorlabel.Location = new System.Drawing.Point(8, 104);
-            this.Authorlabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Authorlabel.Name = "Authorlabel";
-            this.Authorlabel.Size = new System.Drawing.Size(124, 13);
-            this.Authorlabel.TabIndex = 2;
-            this.Authorlabel.Text = "Author: Denis Podushkin";
+            this.AuthorLabel.AutoSize = true;
+            this.AuthorLabel.Location = new System.Drawing.Point(8, 104);
+            this.AuthorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.AuthorLabel.Name = "AuthorLabel";
+            this.AuthorLabel.Size = new System.Drawing.Size(124, 13);
+            this.AuthorLabel.TabIndex = 2;
+            this.AuthorLabel.Text = "Author: Denis Podushkin";
             // 
-            // Emaillabel
+            // EmailLabel
             // 
-            this.Emaillabel.AutoSize = true;
-            this.Emaillabel.Location = new System.Drawing.Point(8, 157);
-            this.Emaillabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Emaillabel.Name = "Emaillabel";
-            this.Emaillabel.Size = new System.Drawing.Size(100, 13);
-            this.Emaillabel.TabIndex = 3;
-            this.Emaillabel.Text = "e-mail for feedback:";
+            this.EmailLabel.AutoSize = true;
+            this.EmailLabel.Location = new System.Drawing.Point(8, 157);
+            this.EmailLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.EmailLabel.Name = "EmailLabel";
+            this.EmailLabel.Size = new System.Drawing.Size(100, 13);
+            this.EmailLabel.TabIndex = 3;
+            this.EmailLabel.Text = "e-mail for feedback:";
             // 
-            // Gitlabel
+            // GitLabel
             // 
-            this.Gitlabel.AutoSize = true;
-            this.Gitlabel.Location = new System.Drawing.Point(8, 180);
-            this.Gitlabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Gitlabel.Name = "Gitlabel";
-            this.Gitlabel.Size = new System.Drawing.Size(43, 13);
-            this.Gitlabel.TabIndex = 4;
-            this.Gitlabel.Text = "GitHub:";
+            this.GitLabel.AutoSize = true;
+            this.GitLabel.Location = new System.Drawing.Point(8, 180);
+            this.GitLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.GitLabel.Name = "GitLabel";
+            this.GitLabel.Size = new System.Drawing.Size(43, 13);
+            this.GitLabel.TabIndex = 4;
+            this.GitLabel.Text = "GitHub:";
             // 
-            // Cclabel
+            // CcLabel
             // 
-            this.Cclabel.AutoSize = true;
-            this.Cclabel.Location = new System.Drawing.Point(9, 256);
-            this.Cclabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Cclabel.Name = "Cclabel";
-            this.Cclabel.Size = new System.Drawing.Size(126, 13);
-            this.Cclabel.TabIndex = 5;
-            this.Cclabel.Text = "2022 Denis Podushkin ©";
+            this.CcLabel.AutoSize = true;
+            this.CcLabel.Location = new System.Drawing.Point(9, 256);
+            this.CcLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.CcLabel.Name = "CcLabel";
+            this.CcLabel.Size = new System.Drawing.Size(126, 13);
+            this.CcLabel.TabIndex = 5;
+            this.CcLabel.Text = "2022 Denis Podushkin ©";
             // 
             // EmailLinkLabel
             // 
@@ -130,15 +130,15 @@ namespace NoteApp.View
             this.ClientSize = new System.Drawing.Size(307, 280);
             this.Controls.Add(this.GitLinkLabel);
             this.Controls.Add(this.EmailLinkLabel);
-            this.Controls.Add(this.Cclabel);
-            this.Controls.Add(this.Gitlabel);
-            this.Controls.Add(this.Emaillabel);
-            this.Controls.Add(this.Authorlabel);
-            this.Controls.Add(this.Versionlabel);
-            this.Controls.Add(this.NoteApplabel);
+            this.Controls.Add(this.CcLabel);
+            this.Controls.Add(this.GitLabel);
+            this.Controls.Add(this.EmailLabel);
+            this.Controls.Add(this.AuthorLabel);
+            this.Controls.Add(this.VersionLabel);
+            this.Controls.Add(this.NoteAppLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AboutForm";
             this.Text = "AboutForm";
             this.ResumeLayout(false);
@@ -148,12 +148,12 @@ namespace NoteApp.View
 
         #endregion
 
-        private System.Windows.Forms.Label NoteApplabel;
-        private System.Windows.Forms.Label Versionlabel;
-        private System.Windows.Forms.Label Authorlabel;
-        private System.Windows.Forms.Label Emaillabel;
-        private System.Windows.Forms.Label Gitlabel;
-        private System.Windows.Forms.Label Cclabel;
+        private System.Windows.Forms.Label NoteAppLabel;
+        private System.Windows.Forms.Label VersionLabel;
+        private System.Windows.Forms.Label AuthorLabel;
+        private System.Windows.Forms.Label EmailLabel;
+        private System.Windows.Forms.Label GitLabel;
+        private System.Windows.Forms.Label CcLabel;
         private System.Windows.Forms.LinkLabel EmailLinkLabel;
         private System.Windows.Forms.LinkLabel GitLinkLabel;
     }
