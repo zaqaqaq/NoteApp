@@ -6,25 +6,43 @@ using System.Threading.Tasks;
 
 namespace NoteApp.Model
 {
+    /// <summary>
     /// Заметка.
+    /// </summary>
     public class Note : ICloneable
     {
-        /// Название заметки
+        /// <summary>
+        /// Название заметки.
+        /// </summary>
         private string _title;
-        /// Категория заметки
+        /// <summary>
+        /// Категория заметки.
+        /// </summary>
         private NoteCategory _category { get; set; }
-        /// Текст заметки
+        /// <summary>
+        /// Текст заметки.
+        /// </summary>
         private string _text;
-        /// Дата создания
+        /// <summary>
+        /// Дата создания.
+        /// </summary>
         private DateTime _createTime { get; set; } = DateTime.Now;
-        ///Дата последнего изменения
+        /// <summary>
+        /// Дата последнего изменения.
+        /// </summary>
         private DateTime _updateTime { get; set; }
-        ///Ограничение длины названия
+        /// <summary>
+        /// Ограничение длины названия.
+        /// </summary>
         private int _noteTitleLimit = 50;
-        ///Название по умолчанию
+        /// <summary>
+        /// Название по умолчанию.
+        /// </summary>
         private string _defaultTitle = "Без Названия";
 
-        /// Get и Set названия
+        /// <summary>
+        /// Get и Set названия.
+        /// </summary>
         public string Title
         {
             get { return _title; }
@@ -45,7 +63,9 @@ namespace NoteApp.Model
             }
         }
 
-        ///Get и Set текста
+        /// <summary>
+        /// Get и Set текста.
+        /// </summary>
         public string Text
         {
             get { return _text; }
@@ -56,7 +76,9 @@ namespace NoteApp.Model
             }
         }
 
+        /// <summary>
         /// Копирования объекта, интерфейс ICloneable
+        /// </summary>
         public Object Clone()
         {
             Note note = new Note();

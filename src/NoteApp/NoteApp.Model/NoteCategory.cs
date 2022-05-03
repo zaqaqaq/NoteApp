@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace NoteApp.Model
 {
+    /// <summary>
     /// Категория заметки
+    /// </summary>
     public enum NoteCategory
     {
         Work,
