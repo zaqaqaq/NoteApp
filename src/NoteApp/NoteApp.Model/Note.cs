@@ -15,30 +15,36 @@ namespace NoteApp.Model
         /// Название заметки.
         /// </summary>
         private string _title;
+
         /// <summary>
         /// Категория заметки.
         /// </summary>
-        private NoteCategory _category { get; set; }
+        public NoteCategory Category { get; set; }
+
         /// <summary>
         /// Текст заметки.
         /// </summary>
         private string _text;
+
         /// <summary>
         /// Дата создания.
         /// </summary>
-        private DateTime _createTime { get; set; } = DateTime.Now;
+        private DateTime CreateTime { get; set; } = DateTime.Now;
+
         /// <summary>
         /// Дата последнего изменения.
         /// </summary>
-        private DateTime _updateTime { get; set; }
+        private DateTime ModifiedTime { get; set; }
+
         /// <summary>
         /// Ограничение длины названия.
         /// </summary>
-        private int _noteTitleLimit = 50;
+        private const int NOTETITLELIMIT = 50;
+
         /// <summary>
         /// Название по умолчанию.
         /// </summary>
-        private string _defaultTitle = "Без Названия";
+        private const string DEFAULTTITLE = "Без Названия";
 
         /// <summary>
         /// Get и Set названия.
@@ -49,17 +55,17 @@ namespace NoteApp.Model
 
             set
             {
-                if (value.Length > _noteTitleLimit)
+                if (value.Length > NOTETITLELIMIT)
                 {
                     throw new ArgumentException("max title length = 50");
                 }
                 if (value == string.Empty)
                 {
-                    _title = _defaultTitle;
+                    _title = DEFAULTTITLE;
                 }
 
                 _title = value;
-                _updateTime = DateTime.Now;
+                ModifiedTime = DateTime.Now;
             }
         }
 
@@ -72,23 +78,21 @@ namespace NoteApp.Model
             set
             {
                 _text = value;
-                _updateTime = DateTime.Now;
+                ModifiedTime = DateTime.Now;
             }
         }
-
-        
 
         /// <summary>
         /// Копирования объекта, интерфейс ICloneable
         /// </summary>
-        public Object Clone()
+        public object Clone()
         {
             Note note = new Note();
             note.Title = this.Title;
             note.Text = this.Text;
-            note._category = this._category;
-            note._createTime = this._createTime;
-            note._updateTime = this._updateTime;
+            note.Category = this.Category;
+            note.CreateTime = this.CreateTime;
+            note.ModifiedTime = this.ModifiedTime;
             return note;
         }
     }
