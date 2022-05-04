@@ -9,7 +9,7 @@ namespace NoteApp.Model
     /// <summary>
     /// Заметка.
     /// </summary>
-    public class Note : ICloneable
+    public class Note: ICloneable
     {
         /// <summary>
         /// Название заметки.
@@ -51,7 +51,7 @@ namespace NoteApp.Model
             {
                 if (value.Length > _noteTitleLimit)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("max title length = 50");
                 }
                 if (value == string.Empty)
                 {
@@ -75,6 +75,8 @@ namespace NoteApp.Model
                 _updateTime = DateTime.Now;
             }
         }
+
+        
 
         /// <summary>
         /// Копирования объекта, интерфейс ICloneable
