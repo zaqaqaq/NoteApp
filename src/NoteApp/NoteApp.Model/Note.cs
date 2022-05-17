@@ -11,30 +11,6 @@ namespace NoteApp.Model
     /// </summary>
     public class Note: ICloneable
     {
-        /// <summary>
-        /// Название заметки.
-        /// </summary>
-        private string _title;
-
-        /// <summary>
-        /// Категория заметки.
-        /// </summary>
-        public NoteCategory Category { get; set; }
-
-        /// <summary>
-        /// Текст заметки.
-        /// </summary>
-        private string _text;
-
-        /// <summary>
-        /// Дата создания.
-        /// </summary>
-        private DateTime CreateTime { get; set; } = DateTime.Now;
-
-        /// <summary>
-        /// Дата последнего изменения.
-        /// </summary>
-        private DateTime ModifiedTime { get; set; }
 
         /// <summary>
         /// Ограничение длины названия.
@@ -45,6 +21,31 @@ namespace NoteApp.Model
         /// Название по умолчанию.
         /// </summary>
         private const string DEFAULTTITLE = "Без Названия";
+
+        /// <summary>
+        /// Название заметки.
+        /// </summary>
+        private string _title;
+
+        /// <summary>
+        /// Текст заметки.
+        /// </summary>
+        private string _text;
+
+        /// <summary>
+        /// Дата создания.
+        /// </summary>
+        public DateTime CreateTime { get; set; } = DateTime.Now;
+
+        /// <summary>
+        /// Дата последнего изменения.
+        /// </summary>
+        public DateTime ModifiedTime { get; set; }
+        /// <summary>
+        /// Категория заметки.
+        /// </summary>
+        public NoteCategory Category { get; set; }
+
 
         /// <summary>
         /// Get и Set названия.
