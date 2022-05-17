@@ -107,5 +107,11 @@
     <None Include="Resources\icons8-заметка-50 %281%29.png" />
     <None Include="Resources\icons8-заметка-50.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NoteApp.Model\NoteApp.Model.csproj">
+      <Project>{a501d028-c4af-4977-8772-b4267b672724}</Project>
+      <Name>NoteApp.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

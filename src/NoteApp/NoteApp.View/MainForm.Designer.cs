@@ -90,7 +90,6 @@ namespace NoteApp.View
             this.SplitContainer.Size = new System.Drawing.Size(822, 474);
             this.SplitContainer.SplitterDistance = 273;
             this.SplitContainer.TabIndex = 1;
-            this.SplitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // IconButtonDel
             // 
@@ -105,6 +104,7 @@ namespace NoteApp.View
             this.IconButtonDel.Size = new System.Drawing.Size(43, 42);
             this.IconButtonDel.TabIndex = 7;
             this.IconButtonDel.UseVisualStyleBackColor = true;
+            this.IconButtonDel.Click += new System.EventHandler(this.IconButtonDel_Click);
             // 
             // IconButtonAdd
             // 
@@ -119,7 +119,7 @@ namespace NoteApp.View
             this.IconButtonAdd.Size = new System.Drawing.Size(43, 42);
             this.IconButtonAdd.TabIndex = 6;
             this.IconButtonAdd.UseVisualStyleBackColor = true;
-            this.IconButtonAdd.Click += new System.EventHandler(this.button3_Click);
+            this.IconButtonAdd.Click += new System.EventHandler(this.IconButtonAdd_Click);
             // 
             // CategoryListBox
             // 
@@ -134,6 +134,7 @@ namespace NoteApp.View
             this.CategoryListBox.Name = "CategoryListBox";
             this.CategoryListBox.Size = new System.Drawing.Size(249, 377);
             this.CategoryListBox.TabIndex = 5;
+            this.CategoryListBox.SelectedIndexChanged += new System.EventHandler(this.NoteListBox_SelectedIndexChanged);
             // 
             // IconButton
             // 
@@ -148,7 +149,7 @@ namespace NoteApp.View
             this.IconButton.Size = new System.Drawing.Size(43, 42);
             this.IconButton.TabIndex = 3;
             this.IconButton.UseVisualStyleBackColor = true;
-            this.IconButton.Click += new System.EventHandler(this.button1_Click);
+            this.IconButton.Click += new System.EventHandler(this.IconButton_Click);
             // 
             // ShowCategoryLabel
             // 
@@ -221,6 +222,7 @@ namespace NoteApp.View
             // 
             // DateTimePickerModified
             // 
+            this.DateTimePickerModified.Enabled = false;
             this.DateTimePickerModified.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DateTimePickerModified.Location = new System.Drawing.Point(269, 65);
             this.DateTimePickerModified.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -230,6 +232,7 @@ namespace NoteApp.View
             // 
             // DateTimePickerCreated
             // 
+            this.DateTimePickerCreated.Enabled = false;
             this.DateTimePickerCreated.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DateTimePickerCreated.Location = new System.Drawing.Point(77, 65);
             this.DateTimePickerCreated.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -243,6 +246,7 @@ namespace NoteApp.View
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteTextBox.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.NoteTextBox.Enabled = false;
             this.NoteTextBox.Location = new System.Drawing.Point(13, 95);
             this.NoteTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NoteTextBox.Multiline = true;
@@ -261,7 +265,7 @@ namespace NoteApp.View
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -278,21 +282,21 @@ namespace NoteApp.View
             // AddNoteToolStripMenuItem
             // 
             this.AddNoteToolStripMenuItem.Name = "AddNoteToolStripMenuItem";
-            this.AddNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+            this.AddNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.AddNoteToolStripMenuItem.Text = "Add Note";
             this.AddNoteToolStripMenuItem.Click += new System.EventHandler(this.addNoteToolStripMenuItem_Click);
             // 
             // EditNoteToolStripMenuItem
             // 
             this.EditNoteToolStripMenuItem.Name = "EditNoteToolStripMenuItem";
-            this.EditNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+            this.EditNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.EditNoteToolStripMenuItem.Text = "Edit Note";
             this.EditNoteToolStripMenuItem.Click += new System.EventHandler(this.editNoteToolStripMenuItem_Click);
             // 
             // RemoveNoteToolStripMenuItem
             // 
             this.RemoveNoteToolStripMenuItem.Name = "RemoveNoteToolStripMenuItem";
-            this.RemoveNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+            this.RemoveNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.RemoveNoteToolStripMenuItem.Text = "Remove Note";
             // 
             // HelpToolStripMenuItem
@@ -306,7 +310,7 @@ namespace NoteApp.View
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.AboutToolStripMenuItem.Text = "About";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -335,7 +339,6 @@ namespace NoteApp.View
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.Text = "NoteApp";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.SplitContainer.Panel1.ResumeLayout(false);
             this.SplitContainer.Panel1.PerformLayout();
             this.SplitContainer.Panel2.ResumeLayout(false);
