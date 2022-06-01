@@ -17,8 +17,6 @@ namespace NoteApp.View
         /// Поле для хранения объектов заметок.
         /// </summary>
         private Project _project;
-
-
         public MainForm()
         {
             _project = new Project();
@@ -60,7 +58,7 @@ namespace NoteApp.View
                 return;
             }
 
-            DialogResult result = MessageBox.Show($"Do you really want to remove {CategoryListBox.SelectedItem.ToString()}?",
+            DialogResult result = MessageBox.Show($"Do you really want to remove {CategoryListBox.SelectedItem}?",
                 "", MessageBoxButtons.OKCancel);
             if (result == DialogResult.OK)
             {
@@ -120,6 +118,7 @@ namespace NoteApp.View
             AddNote();
             UpdateListBox();
         }
+
         /// <summary>
         /// Удаление заметки через меню
         /// </summary>
@@ -130,6 +129,7 @@ namespace NoteApp.View
             RemoveNote(CategoryListBox.SelectedIndex);
             UpdateListBox();
         }
+
         /// <summary>
         /// Окно About
         /// </summary>
@@ -137,9 +137,10 @@ namespace NoteApp.View
         /// <param name="e"></param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutForm af = new AboutForm();
-            af.Show();
+            AboutForm form = new AboutForm();
+            form.Show();
         }
+
         /// <summary>
         /// Закрытие окна приложения
         /// </summary>
@@ -149,6 +150,7 @@ namespace NoteApp.View
         {
             this.Close();
         }
+
         /// <summary>
         /// Добавление заметки через иконку
         /// </summary>
@@ -165,17 +167,18 @@ namespace NoteApp.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void IconButtonAdd_Click(object sender, EventArgs e)
+        private void AddButton_Click(object sender, EventArgs e)
         {
             AddNote();
             UpdateListBox();
         }
+
         /// <summary>
         /// Удаление через иконку
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void IconButtonDel_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             RemoveNote(CategoryListBox.SelectedIndex);
             UpdateListBox();

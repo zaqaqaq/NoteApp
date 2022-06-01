@@ -46,7 +46,7 @@ namespace NoteApp.Model
         /// </summary>
         public NoteCategory Category { get; set; }
 
-
+        
         /// <summary>
         /// Get и Set названия.
         /// </summary>
