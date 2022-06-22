@@ -54,6 +54,7 @@ namespace NoteApp.View
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
+            this.addRandomNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
@@ -265,7 +266,7 @@ namespace NoteApp.View
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -274,7 +275,8 @@ namespace NoteApp.View
             this.EditToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AddNoteToolStripMenuItem,
             this.EditNoteToolStripMenuItem,
-            this.RemoveNoteToolStripMenuItem});
+            this.RemoveNoteToolStripMenuItem,
+            this.addRandomNoteToolStripMenuItem});
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
             this.EditToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.EditToolStripMenuItem.Text = "Edit";
@@ -298,6 +300,7 @@ namespace NoteApp.View
             this.RemoveNoteToolStripMenuItem.Name = "RemoveNoteToolStripMenuItem";
             this.RemoveNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.RemoveNoteToolStripMenuItem.Text = "Remove Note";
+            this.RemoveNoteToolStripMenuItem.Click += new System.EventHandler(this.RemoveNoteToolStripMenuItem_Click);
             // 
             // HelpToolStripMenuItem
             // 
@@ -310,7 +313,7 @@ namespace NoteApp.View
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.AboutToolStripMenuItem.Text = "About";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -327,6 +330,13 @@ namespace NoteApp.View
             this.MenuStrip.Size = new System.Drawing.Size(822, 28);
             this.MenuStrip.TabIndex = 0;
             this.MenuStrip.Text = "menuStrip1";
+            // 
+            // addRandomNoteToolStripMenuItem
+            // 
+            this.addRandomNoteToolStripMenuItem.Name = "addRandomNoteToolStripMenuItem";
+            this.addRandomNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.addRandomNoteToolStripMenuItem.Text = "Add Random Note";
+            this.addRandomNoteToolStripMenuItem.Click += new System.EventHandler(this.addRandomNoteToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -377,6 +387,7 @@ namespace NoteApp.View
         private System.Windows.Forms.Button IconButtonDel;
         private System.Windows.Forms.Label TextLabel;
         private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.ToolStripMenuItem addRandomNoteToolStripMenuItem;
     }
 }
 

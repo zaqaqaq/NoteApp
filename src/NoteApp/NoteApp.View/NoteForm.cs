@@ -126,8 +126,6 @@ namespace NoteApp.View
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-
-            if (CheckFormOnErrors())
             {
                 UpdateNote();
                 _note = _noteCopy;
@@ -143,24 +141,4 @@ namespace NoteApp.View
         }
     }
 }
-
-
-
-
- 
-
       
-
-        
-
-      
-
-        
-
- 
-
-
-   
-
-
-       

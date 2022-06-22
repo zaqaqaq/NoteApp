@@ -18,6 +18,17 @@ namespace NoteApp.View
         /// </summary>
         private Project _project;
 
+        /// <summary>
+        /// Показывать все заметки без учета категории
+        /// </summary>
+        private const string _allCategory = "All";
+
+        /// <summary>
+        /// отображение списка заметок
+        /// </summary>
+        private List<Note> _currentNotes;
+
+
 
         public MainForm()
         {
@@ -42,11 +53,13 @@ namespace NoteApp.View
         /// </summary>
         private void AddNote()
         {
-            Random random = new Random();
-            Note note = new Note();
-            note.Title = random.Next().ToString();
-            note.Text = random.Next().ToString();
-            _project.Notes.Add(note);
+            var noteForm = new NoteForm();
+            noteForm.ShowDialog();
+            if (noteForm.DialogResult == DialogResult.OK)
+            {
+                _project.Notes.Add(noteForm.Note);
+                CategoryListBox.SelectedIndex = -1;
+            }
         }
 
         /// <summary>
@@ -127,9 +140,10 @@ namespace NoteApp.View
         /// <param name="e"></param>
         private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RemoveNote(CategoryListBox.SelectedIndex);
+            EditNote(CategoryListBox.SelectedIndex);
             UpdateListBox();
         }
+
         /// <summary>
         /// Окно About
         /// </summary>
@@ -180,5 +194,49 @@ namespace NoteApp.View
             RemoveNote(CategoryListBox.SelectedIndex);
             UpdateListBox();
         }
+
+        /// <summary>
+        /// Добавить заметку.
+        /// </summary>
+        private void addRandomNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {       
+                Random random = new Random();
+                Note note = new Note();
+                note.Title = random.Next().ToString();
+                note.Text = random.Next().ToString();
+                _project.Notes.Add(note);
+            
+        }
+
+        private void RemoveNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveNote(CategoryListBox.SelectedIndex);
+            UpdateListBox();
+        }
+
+        /// <summary>
+        /// Редактирование существующей заметки.
+        /// </summary>
+        private void EditNote(int index)
+        {
+            if (index == -1)
+            {
+                return;
+            }
+            int currentIndex = index;
+            NoteForm noteForm = new NoteForm();
+            noteForm.Note = _project.Notes[index];
+            noteForm.ShowDialog();
+            _project.Notes[index] = noteForm.Note;
+            if (noteForm.DialogResult == DialogResult.OK)
+            {
+                currentIndex = -1;
+            }
+            if ((CategoryListBox.Items.Count != 0) && (currentIndex < CategoryListBox.Items.Count))
+            {
+                CategoryListBox.SelectedIndex = currentIndex;
+            }
+        }
     }
 }
+
