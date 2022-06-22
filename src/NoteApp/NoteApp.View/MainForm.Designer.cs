@@ -104,7 +104,7 @@ namespace NoteApp.View
             this.IconButtonDel.Size = new System.Drawing.Size(43, 42);
             this.IconButtonDel.TabIndex = 7;
             this.IconButtonDel.UseVisualStyleBackColor = true;
-            this.IconButtonDel.Click += new System.EventHandler(this.IconButtonDel_Click);
+            this.IconButtonDel.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // IconButtonAdd
             // 
@@ -119,7 +119,7 @@ namespace NoteApp.View
             this.IconButtonAdd.Size = new System.Drawing.Size(43, 42);
             this.IconButtonAdd.TabIndex = 6;
             this.IconButtonAdd.UseVisualStyleBackColor = true;
-            this.IconButtonAdd.Click += new System.EventHandler(this.IconButtonAdd_Click);
+            this.IconButtonAdd.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // CategoryListBox
             // 
