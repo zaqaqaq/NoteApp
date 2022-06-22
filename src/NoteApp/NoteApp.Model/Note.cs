@@ -35,16 +35,16 @@ namespace NoteApp.Model
         /// <summary>
         /// Дата создания.
         /// </summary>
-        public DateTime CreateTime { get; set; } = DateTime.Now;
+        public DateTime _creationDate = DateTime.Now;
 
         /// <summary>
         /// Дата последнего изменения.
         /// </summary>
-        public DateTime ModifiedTime { get; set; }
+        public DateTime _modifiedTime;
         /// <summary>
         /// Категория заметки.
         /// </summary>
-        public NoteCategory Category { get; set; }
+        public NoteCategory _category;
 
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace NoteApp.Model
                 }
 
                 _title = value;
-                ModifiedTime = DateTime.Now;
+                _modifiedTime = DateTime.Now;
             }
         }
 
@@ -79,23 +79,82 @@ namespace NoteApp.Model
             set
             {
                 _text = value;
-                ModifiedTime = DateTime.Now;
+                _modifiedTime = DateTime.Now;
             }
         }
 
         /// <summary>
-        /// Копирования объекта, интерфейс ICloneable
+        /// Возвращает дату создания заметки
+        /// </summary>
+        public DateTime CreateTime
+        {
+            get
+            {
+                return _creationDate;
+            }
+        }
+
+        public DateTime ModifiedTime
+        {
+            get
+            {
+                return _modifiedTime;
+            }
+        }
+
+        /// <summary>
+		/// Задает и возвращает категорию заметки.
+		/// </summary>
+		public NoteCategory Category
+        {
+            get
+            {
+                return _category;
+            }
+            set
+            {
+                _category = value;
+                _modifiedTime = DateTime.Now;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="category"></param>
+        /// <param name="text"></param>
+        /// <param name="creationDate"></param>
+        /// <param name="lastModifiedTime"></param>
+        public Note(string name, NoteCategory category, string text,
+            DateTime creationDate, DateTime lastModifiedTime) =>
+            (_title, _category, _text, _creationDate, _modifiedTime)
+            = (name, category, text, creationDate, lastModifiedTime);
+
+
+        /// <summary>
+        /// Создает экземпляр заметки.
+        /// </summary>
+        public Note(string name, NoteCategory category, string text)
+        {
+            Title = name;
+            Category = category;
+            Text = text;
+        }
+
+        public Note()
+        {
+        }
+
+        /// <summary>
+        /// Метод копирования.
         /// </summary>
         public object Clone()
         {
-            Note note = new Note();
-            note.Title = this.Title;
-            note.Text = this.Text;
-            note.Category = this.Category;
-            note.CreateTime = this.CreateTime;
-            note.ModifiedTime = this.ModifiedTime;
-            return note;
+            return new Note(this.Title, this.Category, this.Text);
         }
     }
 }
+
+
 
