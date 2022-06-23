@@ -34,14 +34,21 @@ namespace NoteApp.View
         /// </summary>
         private NoteCategoryTools _noteCategoryTools = new NoteCategoryTools();
 
+        /// <summary>
+        /// Экземпляр класс ProjectSerializer для сереализации.
+        /// </summary>
+        private ProjectSerializer _projectSerializer = new ProjectSerializer();
 
 
         public MainForm()
         {
-            _project = new Project();
             InitializeComponent();
+            _project = new Project();
+            _project = _projectSerializer.LoadFromFile();
+            _currentNotes = _project.Notes;
             CategoryComboBox.SelectedIndex = 0;
             ClearSelectedNote();
+            UpdateListBox();
         }
 
 
@@ -58,6 +65,7 @@ namespace NoteApp.View
                 OutputByCategory();
                 UpdateListBox();
                 CategoryListBox.SelectedIndex = -1;
+                _projectSerializer.SaveToFile(_project);
             }
         }
 
@@ -82,6 +90,7 @@ namespace NoteApp.View
                 ClearSelectedNote();
                 OutputByCategory();
                 UpdateListBox();
+                _projectSerializer.SaveToFile(_project);
             }
             if ((CategoryListBox.Items.Count != 0) && (currentIndex < CategoryListBox.Items.Count))
             {
@@ -295,6 +304,7 @@ namespace NoteApp.View
                 OutputByCategory();
                 UpdateSelectedNote(CategoryListBox.SelectedIndex);
                 UpdateListBox();
+                _projectSerializer.SaveToFile(_project);
             }
             if ((CategoryListBox.Items.Count != 0) && (currentIndex < CategoryListBox.Items.Count))
             {
