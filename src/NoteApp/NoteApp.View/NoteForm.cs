@@ -38,6 +38,12 @@ namespace NoteApp.View
         /// </summary>
         private readonly Color _errorColor = Color.LightPink;
 
+        /// <summary>
+        /// Переменная класса, представляющего из себя два словаря типа 
+        /// <Enum, String> и <String, Enum> 
+        /// </summary>
+        private NoteCategoryTools _noteCategoryTools = new NoteCategoryTools();
+
         public NoteForm()
         {
             InitializeComponent();
@@ -75,20 +81,25 @@ namespace NoteApp.View
         /// </summary>
         private void UpdateForm()
         {
+            CategoryComboBox.SelectedItem = _noteCategoryTools.CategoriesByEnum[_noteCopy.Category];
             TitleTextBox.Text = _noteCopy.Title;
             DateTimePickerCreated.Value = _noteCopy.CreateTime;
             DateTimePickerModified.Value = _noteCopy.ModifiedTime;
             NoteTextBox.Text = _noteCopy.Text;
         }
-
+     
         /// <summary>
         /// Метод обновления заметки.
         /// </summary>
         private void UpdateNote()
         {
+            _noteCopy.Category = _noteCategoryTools.CategoriesByString
+                [CategoryComboBox.SelectedItem.ToString()];
             _noteCopy.Title = TitleTextBox.Text;
             _noteCopy.Text = NoteTextBox.Text;
         }
+
+     
 
         /// <summary>
         /// Метод обработки и валидации названия заметки.
@@ -126,6 +137,7 @@ namespace NoteApp.View
 
         private void OkButton_Click(object sender, EventArgs e)
         {
+            if( CheckFormOnErrors())
             {
                 UpdateNote();
                 _note = _noteCopy;

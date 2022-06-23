@@ -28,25 +28,22 @@ namespace NoteApp.View
         /// </summary>
         private List<Note> _currentNotes;
 
+        /// <summary>
+        /// Переменная класса, представляющего из себя два словаря типа 
+        /// <Enum, String> и <String, Enum> 
+        /// </summary>
+        private NoteCategoryTools _noteCategoryTools = new NoteCategoryTools();
+
 
 
         public MainForm()
         {
             _project = new Project();
             InitializeComponent();
+            CategoryComboBox.SelectedIndex = 0;
+            ClearSelectedNote();
         }
 
-        /// <summary>
-        /// Обновить список заметок.
-        /// </summary>
-        private void UpdateListBox()
-        {
-            CategoryListBox.Items.Clear();
-            foreach (Note note in _project.Notes)
-            {
-                CategoryListBox.Items.Add(note.Title);
-            }
-        }
 
         /// <summary>
         /// Добавить заметку.
@@ -58,60 +55,87 @@ namespace NoteApp.View
             if (noteForm.DialogResult == DialogResult.OK)
             {
                 _project.Notes.Add(noteForm.Note);
+                OutputByCategory();
+                UpdateListBox();
                 CategoryListBox.SelectedIndex = -1;
             }
         }
 
         /// <summary>
-        /// Удалить заметку.
+        /// Удаляет заметку из ListBox.
         /// </summary>
-        /// <param name="index">Индекс заметки.</param>
         private void RemoveNote(int index)
         {
             if (index == -1)
             {
                 return;
             }
-
-            DialogResult result = MessageBox.Show($"Do you really want to remove {CategoryListBox.SelectedItem.ToString()}?",
-                "", MessageBoxButtons.OKCancel);
+            int currentIndex = index;
+            Note note = _project.Notes[index];
+            index = FindNoteIndex(index);
+            var result = MessageBox.Show("Do you really want to remove " + "\"" + CategoryListBox.SelectedItem.ToString()
+                + "\"" + "?", "Deleting a note", MessageBoxButtons.OKCancel, MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
             if (result == DialogResult.OK)
             {
                 _project.Notes.RemoveAt(index);
-                CategoryListBox.SelectedItem = null;
+                ClearSelectedNote();
+                OutputByCategory();
+                UpdateListBox();
             }
-            else return;
+            if ((CategoryListBox.Items.Count != 0) && (currentIndex < CategoryListBox.Items.Count))
+            {
+                CategoryListBox.SelectedIndex = currentIndex;
+            }
         }
 
         /// <summary>
-        /// Обновить поле описания заметки.
+        /// Метод для заполнения.
         /// </summary>
-        /// <param name="index">Индекс заметки.</param>
         private void UpdateSelectedNote(int index)
         {
-            if (CategoryListBox.SelectedIndex == -1)
+            if ((index == -1) || (_currentNotes.Count == 0) || (_currentNotes.Count <= index))
             {
                 ClearSelectedNote();
                 return;
             }
-            NoteTextBox.Text = _project.Notes[index].Text;
-            NameLabel.Text = _project.Notes[index].Title;
-            DateTimePickerCreated.Value = _project.Notes[index].CreateTime;
-            DateTimePickerModified.Value = _project.Notes[index].ModifiedTime;
-            TextLabel.Text = _project.Notes[index].Category.ToString();
+            Note note = _currentNotes[index];
+            NoteTextBox.Text = note.Text;
+            TextLabel.Text = _noteCategoryTools.CategoriesByEnum[note.Category];
+            NameLabel.Text = note.Title;
+            DateTimePickerCreated.Visible = true;
+            DateTimePickerModified.Visible = true;
+            DateTimePickerCreated.Value = note.CreateTime;
+            DateTimePickerModified.Value = note.ModifiedTime;
         }
 
         /// <summary>
-        /// Очистить поле описания заметки.
+        /// Метод для очистки.
         /// </summary>
         private void ClearSelectedNote()
         {
-            NoteTextBox.Text = string.Empty;
-            NameLabel.Text = string.Empty;
-            DateTimePickerCreated.Value = DateTime.Now;
-            DateTimePickerModified.Value = DateTime.Now;
-            TextLabel.Text = string.Empty;
+            NameLabel.Text = "";
+            NoteTextBox.Text = "";
+            TextLabel.Text = "";
+            DateTimePickerCreated.Visible = false;
+            DateTimePickerModified.Visible = false;
         }
+
+        /// <summary>
+        /// Метод для обновления.
+        /// </summary>
+        private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CategoryListBox.SelectedIndex == -1)
+            {
+                ClearSelectedNote();
+            }
+            else
+            {
+                UpdateSelectedNote(CategoryListBox.SelectedIndex);
+            }
+        }
+
 
         /// <summary>
         /// Обработчик изменения выбранной заметки.
@@ -196,22 +220,57 @@ namespace NoteApp.View
         }
 
         /// <summary>
-        /// Добавить заметку.
+        /// Обновляет список заметок в ListBox.
         /// </summary>
-        private void addRandomNoteToolStripMenuItem_Click(object sender, EventArgs e)
-        {       
-                Random random = new Random();
-                Note note = new Note();
-                note.Title = random.Next().ToString();
-                note.Text = random.Next().ToString();
-                _project.Notes.Add(note);
-            
+        private void UpdateListBox()
+        {
+            CategoryListBox.Items.Clear();
+            _currentNotes = _project.SortByModificationTime(_currentNotes);
+            for (int i = 0; i < _currentNotes.Count; i++)
+            {
+                CategoryListBox.Items.Add(_currentNotes[i].Title);
+            }
+        }
+
+
+        /// <summary>
+        /// Вывод на экран списка заметок по выбранной категории
+        /// </summary>
+        private void OutputByCategory()
+        {
+            if (CategoryComboBox.SelectedItem.ToString() != _allCategory)
+            {
+                NoteCategory noteCategory = _noteCategoryTools.CategoriesByString
+                    [CategoryComboBox.SelectedItem.ToString()];
+                _currentNotes = _project.SearchByCategory(_project.Notes, noteCategory);
+            }
+            else
+            {
+                _currentNotes = _project.SortByModificationTime(_project.Notes);
+            }
         }
 
         private void RemoveNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RemoveNote(CategoryListBox.SelectedIndex);
             UpdateListBox();
+        }
+
+        /// <summary>
+        /// Поиск индекса в списке заметок по индексу заметки из текущей категории
+        /// </summary>
+        private int FindNoteIndex(int index)
+        {
+            int resultIndex = 0;
+            for (int i = 0; i < _project.Notes.Count; i++)
+            {
+                if (_project.Notes[i] == _currentNotes[index])
+                {
+                    resultIndex = i;
+                    break;
+                }
+            }
+            return resultIndex;
         }
 
         /// <summary>
@@ -224,6 +283,8 @@ namespace NoteApp.View
                 return;
             }
             int currentIndex = index;
+            Note note = _currentNotes[index];
+            index = FindNoteIndex(index);
             NoteForm noteForm = new NoteForm();
             noteForm.Note = _project.Notes[index];
             noteForm.ShowDialog();
@@ -231,12 +292,24 @@ namespace NoteApp.View
             if (noteForm.DialogResult == DialogResult.OK)
             {
                 currentIndex = -1;
+                OutputByCategory();
+                UpdateSelectedNote(CategoryListBox.SelectedIndex);
+                UpdateListBox();
             }
             if ((CategoryListBox.Items.Count != 0) && (currentIndex < CategoryListBox.Items.Count))
             {
                 CategoryListBox.SelectedIndex = currentIndex;
             }
         }
+
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ClearSelectedNote();
+            OutputByCategory();
+            UpdateListBox();
+        }
     }
 }
+
 

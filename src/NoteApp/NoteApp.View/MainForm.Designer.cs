@@ -54,7 +54,6 @@ namespace NoteApp.View
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
-            this.addRandomNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
@@ -166,12 +165,22 @@ namespace NoteApp.View
             this.CategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Items.AddRange(new object[] {
+            "All",
+            "Work",
+            "Home",
+            "Health and Sports",
+            "People",
+            "Documents",
+            "Finance",
+            "Other"});
             this.CategoryComboBox.Location = new System.Drawing.Point(125, 15);
             this.CategoryComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(135, 24);
             this.CategoryComboBox.TabIndex = 0;
             this.CategoryComboBox.Text = "All";
+            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // TextLabel
             // 
@@ -275,8 +284,7 @@ namespace NoteApp.View
             this.EditToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AddNoteToolStripMenuItem,
             this.EditNoteToolStripMenuItem,
-            this.RemoveNoteToolStripMenuItem,
-            this.addRandomNoteToolStripMenuItem});
+            this.RemoveNoteToolStripMenuItem});
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
             this.EditToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.EditToolStripMenuItem.Text = "Edit";
@@ -331,13 +339,6 @@ namespace NoteApp.View
             this.MenuStrip.TabIndex = 0;
             this.MenuStrip.Text = "menuStrip1";
             // 
-            // addRandomNoteToolStripMenuItem
-            // 
-            this.addRandomNoteToolStripMenuItem.Name = "addRandomNoteToolStripMenuItem";
-            this.addRandomNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.addRandomNoteToolStripMenuItem.Text = "Add Random Note";
-            this.addRandomNoteToolStripMenuItem.Click += new System.EventHandler(this.addRandomNoteToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -387,7 +388,6 @@ namespace NoteApp.View
         private System.Windows.Forms.Button IconButtonDel;
         private System.Windows.Forms.Label TextLabel;
         private System.Windows.Forms.Label NameLabel;
-        private System.Windows.Forms.ToolStripMenuItem addRandomNoteToolStripMenuItem;
     }
 }
 
