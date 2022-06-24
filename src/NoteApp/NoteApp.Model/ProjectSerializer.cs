@@ -9,94 +9,87 @@ using static System.Environment;
 
 namespace NoteApp.Model
 {
-    /// <summary>
-    /// Класс, реализующий сохранение в файл и загрузку проекта из файла.
-    /// </summary>
-    public class ProjectSerializer
+    public static class ProjectSerializer
     {
-        /// <summary>
-        /// Экземляр класса потока.
-        /// </summary>
-        private Stream _stream;
+        private const string _fileName = "NotesApp.notes";
 
-        /// <summary>
-        /// Путь до файла userdata.json.
-        /// </summary>
-        public string FileName { get; set; }
+        private static readonly string _folder = Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData) +
+            "\\Podushkin_NotesApp\\";
 
-        /// <summary>
-        /// Сохраняет данные из экземпляра класса в userdata.json.
-        /// </summary>
-        public void SaveToFile(Project project)
+        private static readonly string _path = _folder + _fileName;
+
+        public static string DefaultPath { get; set; } = _path;
+
+        public static void SaveToFile(Project data)
         {
-            if (!(Directory.Exists(GetFolderPath(SpecialFolder.ApplicationData)
-                + "\\Podushkin\\NoteApp")))
+            if (!File.Exists(DefaultPath))
             {
-                Directory.CreateDirectory(GetFolderPath(SpecialFolder.ApplicationData)
-                    + "\\Podushkin\\NoteApp");
-                if (!File.Exists(FileName))
-                {
-                    File.Create(FileName);
-                }
+                CreatePath(_folder, _fileName);
             }
-            JsonSerializer serializer = new JsonSerializer();
-            using (_stream = File.Open(@FileName, FileMode.OpenOrCreate, FileAccess.Write))
+            var serializer = new JsonSerializer();
+            serializer.Formatting = Formatting.Indented;
+            using (var sw = new StreamWriter(DefaultPath))
+            using (JsonWriter writer = new JsonTextWriter(sw))
             {
-                StreamWriter myWriter = new StreamWriter(_stream);
-                using (JsonWriter writer = new JsonTextWriter(myWriter))
-                {
-                    serializer.Serialize(writer, project);
-                }
+                serializer.Serialize(writer, data);
             }
         }
 
         /// <summary>
-        /// Загружает данные их userdata.json в экземпляр класса Project.
+        /// Создает файл
         /// </summary>
-        /// <returns>Инициализированный экземпляр класса Project.</returns>
-        public Project LoadFromFile()
+        /// <param name="folder">File location</param>
+        /// <param name="fileName">File name</param>
+        public static void CreatePath(string folder, string fileName)
         {
-            Project project = null;
-            if (!(Directory.Exists(GetFolderPath(SpecialFolder.ApplicationData)
-                + "\\Podushkin\\NoteApp")))
+            if (folder == null)
             {
-                Directory.CreateDirectory(GetFolderPath(SpecialFolder.ApplicationData)
-                    + "\\Podushkin\\NoteApp");
-                if (!File.Exists(FileName))
-                {
-                    File.Create(FileName);
-                }
+                folder = _folder;
             }
+            if (fileName == null)
+            {
+                fileName = _fileName;
+            }
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+            if (!File.Exists(folder + fileName))
+            {
+                File.Create(folder + fileName).Close();
+            }
+
+            DefaultPath = folder + fileName;
+        }
+
+        /// <summary>
+        /// Загрузка проекта из файла.
+        /// </summary>
+        /// <returns>
+        /// Возвращает загруженный проект из файла
+        /// </returns>
+        public static Project LoadFromFile()
+        {
+            var serializer = new JsonSerializer();
             try
             {
-                JsonSerializer serializer = new JsonSerializer();
-                using (_stream = File.Open(@FileName, FileMode.OpenOrCreate, FileAccess.Read))
+                using (var sr = new StreamReader(DefaultPath))
+                using (JsonReader reader = new JsonTextReader(sr))
                 {
-                    StreamReader myReader = new StreamReader(_stream);
-                    using (JsonReader reader = new JsonTextReader(myReader))
+                    var project = (Project)serializer.Deserialize<Project>(reader);
+                    if (project == null)
                     {
-                        project = (Project)serializer.Deserialize(reader, typeof(Project));
+                        return new Project();
                     }
+
+                    return project;
                 }
             }
-            catch
+            catch 
             {
-                project = new Project();
+                return new Project();
             }
-            if (project == null)
-            {
-                project = new Project();
-            }
-            return project;
-        }
-
-        /// <summary>
-        /// Создает пустой экземпляр <see cref="ProjectSerializer">. 
-        /// </summary>
-        public ProjectSerializer()
-        {
-            FileName = GetFolderPath(SpecialFolder.ApplicationData)
-                    + "\\Podushkin\\NoteApp\\notes.json";
         }
     }
 }

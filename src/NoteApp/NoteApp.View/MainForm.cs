@@ -28,23 +28,13 @@ namespace NoteApp.View
         /// </summary>
         private List<Note> _currentNotes;
 
-        /// <summary>
-        /// Переменная класса, представляющего из себя два словаря типа 
-        /// <Enum, String> и <String, Enum> 
-        /// </summary>
-        private NoteCategoryTools _noteCategoryTools = new NoteCategoryTools();
-
-        /// <summary>
-        /// Экземпляр класс ProjectSerializer для сереализации.
-        /// </summary>
-        private ProjectSerializer _projectSerializer = new ProjectSerializer();
-
+        
 
         public MainForm()
         {
             InitializeComponent();
             _project = new Project();
-            _project = _projectSerializer.LoadFromFile();
+            _project = ProjectSerializer.LoadFromFile();
             _currentNotes = _project.Notes;
             CategoryComboBox.SelectedIndex = 0;
             ClearSelectedNote();
@@ -65,7 +55,7 @@ namespace NoteApp.View
                 OutputByCategory();
                 UpdateListBox();
                 CategoryListBox.SelectedIndex = -1;
-                _projectSerializer.SaveToFile(_project);
+                ProjectSerializer.SaveToFile(_project);
             }
         }
 
@@ -90,7 +80,7 @@ namespace NoteApp.View
                 ClearSelectedNote();
                 OutputByCategory();
                 UpdateListBox();
-                _projectSerializer.SaveToFile(_project);
+                ProjectSerializer.SaveToFile(_project);
             }
             if ((CategoryListBox.Items.Count != 0) && (currentIndex < CategoryListBox.Items.Count))
             {
@@ -110,7 +100,7 @@ namespace NoteApp.View
             }
             Note note = _currentNotes[index];
             NoteTextBox.Text = note.Text;
-            TextLabel.Text = _noteCategoryTools.CategoriesByEnum[note.Category];
+            TextLabel.Text = Enum.GetName(typeof(NoteCategory), note.Category);
             NameLabel.Text = note.Title;
             DateTimePickerCreated.Visible = true;
             DateTimePickerModified.Visible = true;
@@ -203,7 +193,7 @@ namespace NoteApp.View
         /// <param name="e"></param>
         private void IconButton_Click(object sender, EventArgs e)
         {
-            AddNote();
+            EditNote(CategoryListBox.SelectedIndex);
             UpdateListBox();
         }
 
@@ -249,8 +239,14 @@ namespace NoteApp.View
         {
             if (CategoryComboBox.SelectedItem.ToString() != _allCategory)
             {
-                NoteCategory noteCategory = _noteCategoryTools.CategoriesByString
-                    [CategoryComboBox.SelectedItem.ToString()];
+                NoteCategory noteCategory = new NoteCategory();
+                foreach (var category in Enum.GetValues(typeof(NoteCategory)))
+                {
+                    if (CategoryComboBox.SelectedItem.ToString() == category.ToString())
+                    {
+                        noteCategory = (NoteCategory)category;
+                    }
+                }
                 _currentNotes = _project.SearchByCategory(_project.Notes, noteCategory);
             }
             else
@@ -304,7 +300,7 @@ namespace NoteApp.View
                 OutputByCategory();
                 UpdateSelectedNote(CategoryListBox.SelectedIndex);
                 UpdateListBox();
-                _projectSerializer.SaveToFile(_project);
+                ProjectSerializer.SaveToFile(_project);
             }
             if ((CategoryListBox.Items.Count != 0) && (currentIndex < CategoryListBox.Items.Count))
             {
