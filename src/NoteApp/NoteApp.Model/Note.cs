@@ -46,7 +46,6 @@ namespace NoteApp.Model
         /// </summary>
         public NoteCategory _category;
 
-
         /// <summary>
         /// Get и Set названия.
         /// </summary>
@@ -94,6 +93,9 @@ namespace NoteApp.Model
             }
         }
 
+        /// <summary>
+        /// Возвращает дату изменения заметки
+        /// </summary>
         public DateTime ModifiedTime
         {
             get
@@ -130,7 +132,6 @@ namespace NoteApp.Model
             DateTime creationDate, DateTime ModifiedTime) =>
             (_title, _category, _text, _creationDate, _modifiedTime)
             = (name, category, text, creationDate, ModifiedTime);
-
 
         /// <summary>
         /// Создает экземпляр заметки.

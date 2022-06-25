@@ -28,8 +28,6 @@ namespace NoteApp.View
         /// </summary>
         private List<Note> _currentNotes;
 
-        
-
         public MainForm()
         {
             InitializeComponent();
@@ -40,7 +38,6 @@ namespace NoteApp.View
             ClearSelectedNote();
             UpdateListBox();
         }
-
 
         /// <summary>
         /// Добавить заметку.
@@ -60,7 +57,7 @@ namespace NoteApp.View
         }
 
         /// <summary>
-        /// Удаляет заметку из ListBox.
+        /// Удалить заметку.
         /// </summary>
         private void RemoveNote(int index)
         {
@@ -135,7 +132,6 @@ namespace NoteApp.View
             }
         }
 
-
         /// <summary>
         /// Обработчик изменения выбранной заметки.
         /// </summary>
@@ -147,7 +143,7 @@ namespace NoteApp.View
         }
 
         /// <summary>
-        /// Добавление новой заметки 
+        /// Добавление новой заметки через меню.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -156,8 +152,9 @@ namespace NoteApp.View
             AddNote();
             UpdateListBox();
         }
+
         /// <summary>
-        /// Удаление заметки через меню
+        /// Удаление заметки через меню.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -177,6 +174,7 @@ namespace NoteApp.View
             AboutForm af = new AboutForm();
             af.Show();
         }
+
         /// <summary>
         /// Закрытие окна приложения
         /// </summary>
@@ -186,8 +184,9 @@ namespace NoteApp.View
         {
             this.Close();
         }
+
         /// <summary>
-        /// Добавление заметки через иконку
+        /// Редактирование заметки через иконку
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -198,7 +197,7 @@ namespace NoteApp.View
         }
 
         /// <summary>
-        /// 
+        /// Добавление заметки через иконку.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -207,8 +206,9 @@ namespace NoteApp.View
             AddNote();
             UpdateListBox();
         }
+
         /// <summary>
-        /// Удаление через иконку
+        /// Удаление заметки через иконку
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -230,7 +230,6 @@ namespace NoteApp.View
                 CategoryListBox.Items.Add(_currentNotes[i].Title);
             }
         }
-
 
         /// <summary>
         /// Вывод на экран списка заметок по выбранной категории
@@ -255,6 +254,11 @@ namespace NoteApp.View
             }
         }
 
+        /// <summary>
+        /// Удаление заметки через меню.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RemoveNote(CategoryListBox.SelectedIndex);
@@ -307,7 +311,6 @@ namespace NoteApp.View
                 CategoryListBox.SelectedIndex = currentIndex;
             }
         }
-
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -43,7 +43,6 @@ namespace NoteApp.View
             InitializeComponent();
         }
 
-
         /// <summary>
         /// Задает и возвращает объект заметки.
         /// </summary>
@@ -67,8 +66,6 @@ namespace NoteApp.View
                 UpdateForm();
             }
         }
-
-
 
         /// <summary>
         /// Метод обновления формы.
@@ -98,8 +95,6 @@ namespace NoteApp.View
             _noteCopy.Text = NoteTextBox.Text;
         }
 
-
-
         /// <summary>
         /// Метод обработки и валидации названия заметки.
         /// </summary>
@@ -119,7 +114,7 @@ namespace NoteApp.View
         }
 
         /// <summary>
-        /// Проверка на анличие ошибок в форме.
+        /// Проверка на наличие ошибок в форме.
         /// </summary>
         private bool CheckFormOnErrors()
         {
