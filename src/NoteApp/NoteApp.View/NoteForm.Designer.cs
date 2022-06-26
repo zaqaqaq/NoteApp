@@ -64,7 +64,7 @@ namespace NoteApp.View
             "All",
             "Work",
             "Home",
-            "Health and Sports",
+            "HealthAndSports",
             "People",
             "Documents",
             "Finance",
