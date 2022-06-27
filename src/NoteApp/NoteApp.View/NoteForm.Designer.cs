@@ -61,7 +61,6 @@ namespace NoteApp.View
             | System.Windows.Forms.AnchorStyles.Left)));
             this.CategoryComboBox.FormattingEnabled = true;
             this.CategoryComboBox.Items.AddRange(new object[] {
-            "All",
             "Work",
             "Home",
             "HealthAndSports",
