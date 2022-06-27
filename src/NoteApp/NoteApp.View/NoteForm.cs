@@ -38,17 +38,10 @@ namespace NoteApp.View
         /// </summary>
         private readonly Color _errorColor = Color.LightPink;
 
-        /// <summary>
-        /// Переменная класса, представляющего из себя два словаря типа 
-        /// <Enum, String> и <String, Enum> 
-        /// </summary>
-        private NoteCategoryTools _noteCategoryTools = new NoteCategoryTools();
-
         public NoteForm()
         {
             InitializeComponent();
         }
-
 
         /// <summary>
         /// Задает и возвращает объект заметки.
@@ -74,32 +67,33 @@ namespace NoteApp.View
             }
         }
 
-
-
         /// <summary>
         /// Метод обновления формы.
         /// </summary>
         private void UpdateForm()
         {
-            CategoryComboBox.SelectedItem = _noteCategoryTools.CategoriesByEnum[_noteCopy.Category];
+            CategoryComboBox.SelectedItem = Enum.GetName(typeof(NoteCategory), _noteCopy.Category);
             TitleTextBox.Text = _noteCopy.Title;
             DateTimePickerCreated.Value = _noteCopy.CreateTime;
             DateTimePickerModified.Value = _noteCopy.ModifiedTime;
             NoteTextBox.Text = _noteCopy.Text;
         }
-     
+
         /// <summary>
         /// Метод обновления заметки.
         /// </summary>
         private void UpdateNote()
         {
-            _noteCopy.Category = _noteCategoryTools.CategoriesByString
-                [CategoryComboBox.SelectedItem.ToString()];
+            foreach (var category in Enum.GetValues(typeof(NoteCategory)))
+            {
+                if (CategoryComboBox.SelectedItem.ToString() == category.ToString())
+                {
+                    _noteCopy.Category = (NoteCategory)category;
+                }
+            }
             _noteCopy.Title = TitleTextBox.Text;
             _noteCopy.Text = NoteTextBox.Text;
         }
-
-     
 
         /// <summary>
         /// Метод обработки и валидации названия заметки.
@@ -120,7 +114,7 @@ namespace NoteApp.View
         }
 
         /// <summary>
-        /// Проверка на анличие ошибок в форме.
+        /// Проверка на наличие ошибок в форме.
         /// </summary>
         private bool CheckFormOnErrors()
         {
@@ -137,7 +131,7 @@ namespace NoteApp.View
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if( CheckFormOnErrors())
+            if (CheckFormOnErrors())
             {
                 UpdateNote();
                 _note = _noteCopy;
@@ -153,4 +147,3 @@ namespace NoteApp.View
         }
     }
 }
-      

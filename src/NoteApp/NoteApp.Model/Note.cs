@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace NoteApp.Model
     /// <summary>
     /// Заметка.
     /// </summary>
-    public class Note: ICloneable
+    public class Note : ICloneable
     {
 
         /// <summary>
@@ -45,7 +46,6 @@ namespace NoteApp.Model
         /// Категория заметки.
         /// </summary>
         public NoteCategory _category;
-
 
         /// <summary>
         /// Get и Set названия.
@@ -94,6 +94,9 @@ namespace NoteApp.Model
             }
         }
 
+        /// <summary>
+        /// Возвращает дату изменения заметки
+        /// </summary>
         public DateTime ModifiedTime
         {
             get
@@ -125,12 +128,11 @@ namespace NoteApp.Model
         /// <param name="category"></param>
         /// <param name="text"></param>
         /// <param name="creationDate"></param>
-        /// <param name="lastModifiedTime"></param>
+        /// <param name="ModifiedTime"></param>
         public Note(string name, NoteCategory category, string text,
-            DateTime creationDate, DateTime lastModifiedTime) =>
+            DateTime creationDate, DateTime ModifiedTime) =>
             (_title, _category, _text, _creationDate, _modifiedTime)
-            = (name, category, text, creationDate, lastModifiedTime);
-
+            = (name, category, text, creationDate, ModifiedTime);
 
         /// <summary>
         /// Создает экземпляр заметки.
@@ -155,6 +157,3 @@ namespace NoteApp.Model
         }
     }
 }
-
-
-

@@ -28,22 +28,15 @@ namespace NoteApp.View
         /// </summary>
         private List<Note> _currentNotes;
 
-        /// <summary>
-        /// Переменная класса, представляющего из себя два словаря типа 
-        /// <Enum, String> и <String, Enum> 
-        /// </summary>
-        private NoteCategoryTools _noteCategoryTools = new NoteCategoryTools();
-
-
-
         public MainForm()
         {
-            _project = new Project();
             InitializeComponent();
+            _project = new Project();
+            _currentNotes = _project.Notes;
             CategoryComboBox.SelectedIndex = 0;
             ClearSelectedNote();
+            UpdateListBox();
         }
-
 
         /// <summary>
         /// Добавить заметку.
@@ -62,7 +55,7 @@ namespace NoteApp.View
         }
 
         /// <summary>
-        /// Удаляет заметку из ListBox.
+        /// Удалить заметку.
         /// </summary>
         private void RemoveNote(int index)
         {
@@ -101,7 +94,7 @@ namespace NoteApp.View
             }
             Note note = _currentNotes[index];
             NoteTextBox.Text = note.Text;
-            TextLabel.Text = _noteCategoryTools.CategoriesByEnum[note.Category];
+            TextLabel.Text = Enum.GetName(typeof(NoteCategory), note.Category);
             NameLabel.Text = note.Title;
             DateTimePickerCreated.Visible = true;
             DateTimePickerModified.Visible = true;
@@ -136,7 +129,6 @@ namespace NoteApp.View
             }
         }
 
-
         /// <summary>
         /// Обработчик изменения выбранной заметки.
         /// </summary>
@@ -148,7 +140,7 @@ namespace NoteApp.View
         }
 
         /// <summary>
-        /// Добавление новой заметки 
+        /// Добавление новой заметки через меню.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -157,8 +149,9 @@ namespace NoteApp.View
             AddNote();
             UpdateListBox();
         }
+
         /// <summary>
-        /// Удаление заметки через меню
+        /// Удаление заметки через меню.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -178,6 +171,7 @@ namespace NoteApp.View
             AboutForm af = new AboutForm();
             af.Show();
         }
+
         /// <summary>
         /// Закрытие окна приложения
         /// </summary>
@@ -187,19 +181,20 @@ namespace NoteApp.View
         {
             this.Close();
         }
+
         /// <summary>
-        /// Добавление заметки через иконку
+        /// Редактирование заметки через иконку
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void IconButton_Click(object sender, EventArgs e)
         {
-            AddNote();
+            EditNote(CategoryListBox.SelectedIndex);
             UpdateListBox();
         }
 
         /// <summary>
-        /// 
+        /// Добавление заметки через иконку.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -208,8 +203,9 @@ namespace NoteApp.View
             AddNote();
             UpdateListBox();
         }
+
         /// <summary>
-        /// Удаление через иконку
+        /// Удаление заметки через иконку
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -232,7 +228,6 @@ namespace NoteApp.View
             }
         }
 
-
         /// <summary>
         /// Вывод на экран списка заметок по выбранной категории
         /// </summary>
@@ -240,8 +235,14 @@ namespace NoteApp.View
         {
             if (CategoryComboBox.SelectedItem.ToString() != _allCategory)
             {
-                NoteCategory noteCategory = _noteCategoryTools.CategoriesByString
-                    [CategoryComboBox.SelectedItem.ToString()];
+                NoteCategory noteCategory = new NoteCategory();
+                foreach (var category in Enum.GetValues(typeof(NoteCategory)))
+                {
+                    if (CategoryComboBox.SelectedItem.ToString() == category.ToString())
+                    {
+                        noteCategory = (NoteCategory)category;
+                    }
+                }
                 _currentNotes = _project.SearchByCategory(_project.Notes, noteCategory);
             }
             else
@@ -250,6 +251,11 @@ namespace NoteApp.View
             }
         }
 
+        /// <summary>
+        /// Удаление заметки через меню.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RemoveNote(CategoryListBox.SelectedIndex);
@@ -302,7 +308,6 @@ namespace NoteApp.View
             }
         }
 
-
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ClearSelectedNote();
@@ -311,5 +316,3 @@ namespace NoteApp.View
         }
     }
 }
-
-
