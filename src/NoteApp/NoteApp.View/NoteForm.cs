@@ -131,6 +131,11 @@ namespace NoteApp.View
 
         private void OkButton_Click(object sender, EventArgs e)
         {
+            if (CategoryComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Выберите категорию");
+                return;
+            }
             if (CheckFormOnErrors())
             {
                 UpdateNote();
@@ -144,6 +149,11 @@ namespace NoteApp.View
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void NoteTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

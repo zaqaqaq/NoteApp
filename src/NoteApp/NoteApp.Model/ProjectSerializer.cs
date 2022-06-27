@@ -9,6 +9,9 @@ using static System.Environment;
 
 namespace NoteApp.Model
 {
+    /// <summary>
+    /// Класс, реализующий сохранение и загрузку
+    /// </summary>
     public static class ProjectSerializer
     {
         private const string _fileName = "NotesApp.notes";
