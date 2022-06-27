@@ -57,6 +57,36 @@ namespace NoteApp.View
         }
 
         /// <summary>
+        /// Редактирование существующей заметки.
+        /// </summary>
+        private void EditNote(int index)
+        {
+            if (index == -1)
+            {
+                return;
+            }
+            int currentIndex = index;
+            Note note = _currentNotes[index];
+            index = FindNoteIndex(index);
+            NoteForm noteForm = new NoteForm();
+            noteForm.Note = _project.Notes[index];
+            noteForm.ShowDialog();
+            _project.Notes[index] = noteForm.Note;
+            if (noteForm.DialogResult == DialogResult.OK)
+            {
+                currentIndex = -1;
+                OutputByCategory();
+                UpdateSelectedNote(CategoryListBox.SelectedIndex);
+                UpdateListBox();
+                ProjectSerializer.SaveToFile(_project);
+            }
+            if ((CategoryListBox.Items.Count != 0) && (currentIndex < CategoryListBox.Items.Count))
+            {
+                CategoryListBox.SelectedIndex = currentIndex;
+            }
+        }
+
+        /// <summary>
         /// Удалить заметку.
         /// </summary>
         private void RemoveNote(int index)
@@ -280,36 +310,6 @@ namespace NoteApp.View
                 }
             }
             return resultIndex;
-        }
-
-        /// <summary>
-        /// Редактирование существующей заметки.
-        /// </summary>
-        private void EditNote(int index)
-        {
-            if (index == -1)
-            {
-                return;
-            }
-            int currentIndex = index;
-            Note note = _currentNotes[index];
-            index = FindNoteIndex(index);
-            NoteForm noteForm = new NoteForm();
-            noteForm.Note = _project.Notes[index];
-            noteForm.ShowDialog();
-            _project.Notes[index] = noteForm.Note;
-            if (noteForm.DialogResult == DialogResult.OK)
-            {
-                currentIndex = -1;
-                OutputByCategory();
-                UpdateSelectedNote(CategoryListBox.SelectedIndex);
-                UpdateListBox();
-                ProjectSerializer.SaveToFile(_project);
-            }
-            if ((CategoryListBox.Items.Count != 0) && (currentIndex < CategoryListBox.Items.Count))
-            {
-                CategoryListBox.SelectedIndex = currentIndex;
-            }
         }
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
