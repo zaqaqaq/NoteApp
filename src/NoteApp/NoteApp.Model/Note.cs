@@ -127,11 +127,11 @@ namespace NoteApp.Model
         /// <param name="category"></param>
         /// <param name="text"></param>
         /// <param name="creationDate"></param>
-        /// <param name="ModifiedTime"></param>
+        /// <param name="modifiedTime"></param>
         public Note(string name, NoteCategory category, string text,
-            DateTime creationDate, DateTime ModifiedTime) =>
+            DateTime creationDate, DateTime modifiedTime) =>
             (_title, _category, _text, _creationDate, _modifiedTime)
-            = (name, category, text, creationDate, ModifiedTime);
+            = (name, category, text, creationDate, modifiedTime);
 
         /// <summary>
         /// Создает экземпляр заметки.

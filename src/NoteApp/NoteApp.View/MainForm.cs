@@ -163,6 +163,50 @@ namespace NoteApp.View
         }
 
         /// <summary>
+        /// Вывод на экран списка заметок по выбранной категории
+        /// </summary>
+        private void OutputByCategory()
+        {
+            if (CategoryComboBox.SelectedItem.ToString() != _allCategory)
+            {
+                NoteCategory noteCategory = new NoteCategory();
+                foreach (var category in Enum.GetValues(typeof(NoteCategory)))
+                {
+                    if (CategoryComboBox.SelectedItem.ToString() == category.ToString())
+                    {
+                        noteCategory = (NoteCategory)category;
+                    }
+                }
+                _currentNotes = _project.SearchByCategory(_project.Notes, noteCategory);
+            }
+            else
+            {
+                _currentNotes = _project.SortByModificationTime(_project.Notes);
+            }
+        }
+
+        /// <summary>
+        /// Поиск индекса в списке заметок по индексу заметки из текущей категории
+        /// </summary>
+        private int FindNoteIndex(int index)
+        {
+            return _project.Notes.IndexOf(_currentNotes[index]);
+        }
+
+        /// <summary>
+        /// Обновляет список заметок в ListBox.
+        /// </summary>
+        private void UpdateListBox()
+        {
+            CategoryListBox.Items.Clear();
+            _currentNotes = _project.SortByModificationTime(_currentNotes);
+            for (int i = 0; i < _currentNotes.Count; i++)
+            {
+                CategoryListBox.Items.Add(_currentNotes[i].Title);
+            }
+        }
+
+        /// <summary>
         /// Обработчик изменения выбранной заметки.
         /// </summary>
         /// <param name="sender"></param>
@@ -249,42 +293,6 @@ namespace NoteApp.View
         }
 
         /// <summary>
-        /// Обновляет список заметок в ListBox.
-        /// </summary>
-        private void UpdateListBox()
-        {
-            CategoryListBox.Items.Clear();
-            _currentNotes = _project.SortByModificationTime(_currentNotes);
-            for (int i = 0; i < _currentNotes.Count; i++)
-            {
-                CategoryListBox.Items.Add(_currentNotes[i].Title);
-            }
-        }
-
-        /// <summary>
-        /// Вывод на экран списка заметок по выбранной категории
-        /// </summary>
-        private void OutputByCategory()
-        {
-            if (CategoryComboBox.SelectedItem.ToString() != _allCategory)
-            {
-                NoteCategory noteCategory = new NoteCategory();
-                foreach (var category in Enum.GetValues(typeof(NoteCategory)))
-                {
-                    if (CategoryComboBox.SelectedItem.ToString() == category.ToString())
-                    {
-                        noteCategory = (NoteCategory)category;
-                    }
-                }
-                _currentNotes = _project.SearchByCategory(_project.Notes, noteCategory);
-            }
-            else
-            {
-                _currentNotes = _project.SortByModificationTime(_project.Notes);
-            }
-        }
-
-        /// <summary>
         /// Удаление заметки через меню.
         /// </summary>
         /// <param name="sender"></param>
@@ -293,23 +301,6 @@ namespace NoteApp.View
         {
             RemoveNote(CategoryListBox.SelectedIndex);
             UpdateListBox();
-        }
-
-        /// <summary>
-        /// Поиск индекса в списке заметок по индексу заметки из текущей категории
-        /// </summary>
-        private int FindNoteIndex(int index)
-        {
-            int resultIndex = 0;
-            for (int i = 0; i < _project.Notes.Count; i++)
-            {
-                if (_project.Notes[i] == _currentNotes[index])
-                {
-                    resultIndex = i;
-                    break;
-                }
-            }
-            return resultIndex;
         }
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
